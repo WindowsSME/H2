@@ -31,16 +31,18 @@ try {
             } else {
                 $serialNumber = [System.Text.Encoding]::ASCII.GetString($serialNumberBytes)
             }
-            $monitorLabel = "Monitor $monitorCounter"
-            $monitorInfoArray += "${monitorLabel}: $serialNumber ($($monitor.Description))"
+            $monitorLabel = "Display$monitorCounter"
+            $deviceID = ($deviceID -split '\\')[1]
+            $monitorInfoArray += "${monitorLabel}: $serialNumber ($deviceID) $($monitor.Description)"
+            #$monitorInfoArray += "${monitorLabel}: $serialNumber ($($monitor.DeviceID))_$($monitor.Description)"
             $monitorCounter++
         }
     }
     $monitorInfoString = $monitorInfoArray -join " | "
     $monitorInfoString = $monitorInfoString -replace '\s*\|\s*', ' | '
 
-    Write-Host $monitorInfoString
+    Write-Output $monitorInfoString
 
 } catch {
-    Write-Host "An error occurred: $_.Exception.Message"
+    Write-Output "An error occurred: $_.Exception.Message"
 }
