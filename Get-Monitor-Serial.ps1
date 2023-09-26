@@ -33,7 +33,7 @@ try {
             }
             $monitorLabel = "Display$monitorCounter"
             $deviceID = ($deviceID -split '\\')[1]
-            $monitorInfoArray += "${monitorLabel}: $serialNumber ($deviceID) $($monitor.Description)"
+            $monitorInfoArray += "${monitorLabel}: $serialNumber ($deviceID) $($monitor.Name)"
             $monitorCounter++
         }
     }
@@ -45,3 +45,4 @@ try {
 } catch {
     Write-Output "An error occurred: $_.Exception.Message"
 }
+
