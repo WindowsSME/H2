@@ -10,8 +10,8 @@ try {
     $monitors = Get-WmiObject -Namespace "root\cimv2" -Class "Win32_PnPEntity" | Where-Object { $_.Service -like "*monitor*" }
     $monitorInfoTable = @{}
     foreach ($monitor in $monitorInfo) {
-        $suffix = $monitor.InstanceName -replace '^.+?(_.*)$','$1'
-        $instanceName = $monitor.InstanceName -replace $suffix, ''
+        $pnpDID = $monitor.InstanceName -split '_0'
+        $instanceName = $pnpDID[0..($pnpDID.Length - 2)] -join '_0'
         $monitorInfoTable[$instanceName] = $monitor
     }
     $monitorCounter = 1
@@ -45,4 +45,3 @@ try {
 } catch {
     Write-Output "An error occurred: $_.Exception.Message"
 }
-
