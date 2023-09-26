@@ -34,7 +34,6 @@ try {
             $monitorLabel = "Display$monitorCounter"
             $deviceID = ($deviceID -split '\\')[1]
             $monitorInfoArray += "${monitorLabel}: $serialNumber ($deviceID) $($monitor.Description)"
-            #$monitorInfoArray += "${monitorLabel}: $serialNumber ($($monitor.DeviceID))_$($monitor.Description)"
             $monitorCounter++
         }
     }
