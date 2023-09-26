@@ -10,7 +10,8 @@ try {
     $monitors = Get-WmiObject -Namespace "root\cimv2" -Class "Win32_PnPEntity" | Where-Object { $_.Service -like "*monitor*" }
     $monitorInfoTable = @{}
     foreach ($monitor in $monitorInfo) {
-        $instanceName = $monitor.InstanceName -replace "_0$"
+        $suffix = $monitor.InstanceName -replace '^.+?(_.*)$','$1'
+        $instanceName = $monitor.InstanceName -replace $suffix, ''
         $monitorInfoTable[$instanceName] = $monitor
     }
     $monitorCounter = 1
